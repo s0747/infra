@@ -43,6 +43,7 @@ cilium status
 - K8S status
 ```
 kubectl get pods -n kube-system -l k8s-app=kube-dns
+kubectl get pods -n ingress-nginx
 ```
 
 - Ingress
