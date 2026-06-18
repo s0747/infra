@@ -34,7 +34,7 @@ bpffs                  /sys/fs/bpf             bpf     defaults        0 0
 
 - Cilium install
 ```
-cilium install
+cilium install --set ipam.operator.clusterPoolIPv4PodCIDRList="10.244.0.0/16"
 ```
 - Cilium status
 ```
