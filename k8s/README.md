@@ -28,3 +28,11 @@ rm cilium-linux-${CLI_ARCH}.tar.gz{,.sha256sum}
 ```
 cilium install
 ```
+- Cilium status
+```
+clilium status
+```
+- K8S status
+```
+kubectl get pods -n kube-system -l k8s-app=kube-dns
+```
