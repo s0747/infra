@@ -1,0 +1,32 @@
+# Wyłączamy zbędne alerty dla klastra jedno-węzłowego (np. brak drugiego mastera)
+alertmanager:
+  enabled: true
+  alertmanagerSpec:
+    replicas: 1
+
+prometheus:
+  prometheusSpec:
+    replicas: 1
+    # Retencja danych - jak długo trzymać metryki (domyślnie 10 dni, oszczędza dysk)
+    retention: 10d
+
+# Grafana - automatycznie załaduje panele klastra
+grafana:
+  enabled: true
+  adminPassword: "GrafanaAdmin"
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - grafana.192.168.8.5.nip.io
+    path: /
+    annotations:
+      kubernetes.io/ingress.class: nginx
+
+
+# Komponenty zbierające metryki z Twojego systemu
+kubeStateMetrics:
+  enabled: true
+
+nodeExporter:
+  enabled: true
