@@ -21,7 +21,15 @@ curl -L --fail --remote-name-all https://github.com/cilium/cilium-cli/releases/d
 sha256sum --check cilium-linux-${CLI_ARCH}.tar.gz.sha256sum
 sudo tar xzvfC cilium-linux-${CLI_ARCH}.tar.gz /usr/local/bin
 rm cilium-linux-${CLI_ARCH}.tar.gz{,.sha256sum}
+```
 
+- BPF
+```
+sudo mount bpffs /sys/fs/bpf -t bpf
+
+add to fstab:
+
+bpffs                  /sys/fs/bpf             bpf     defaults        0 0
 ```
 
 - Cilium install
@@ -30,7 +38,7 @@ cilium install
 ```
 - Cilium status
 ```
-clilium status
+cilium status
 ```
 - K8S status
 ```
