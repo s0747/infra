@@ -1,0 +1,18 @@
+loki:
+  # Wyłączamy uwierzytelnianie wielodostępne (Multi-tenancy), 
+  # ponieważ to mały, prywatny klaster deweloperski
+  auth_enabled: false
+
+  # Konfiguracja przechowywania danych (Retention)
+  # Zapobiega zapchaniu dysku na jednym węźle przez stare logi
+  limits_config:
+    retention_period: 168h # Logi będą kasowane automatycznie po 7 dniach
+
+promtail:
+  enabled: true
+  # Promtail automatycznie mapuje tagi z Kubernetes (pod, namespace, container)
+  # i przekazuje je do Loki w celu łatwego filtrowania w Grafanie
+  config:
+    log_level: info
+    server:
+      http_listen_port: 9080
