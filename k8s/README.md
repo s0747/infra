@@ -50,3 +50,19 @@ kubectl get pods -n ingress-nginx
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/baremetal/deploy.yaml
 ```
+
+
+- Grafana, prometheus
+```
+
+```
+
+- Loki
+```
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+
+helm install loki grafana/loki-stack \
+  --namespace monitoring \
+  --values loki-values.yaml
+```
