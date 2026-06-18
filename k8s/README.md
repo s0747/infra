@@ -44,3 +44,8 @@ cilium status
 ```
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 ```
+
+- Ingress
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/baremetal/deploy.yaml
+```
