@@ -12,6 +12,13 @@ sudo ctr -n k8s.io images clear
 sudo kubeadm init --config kubeadm-config.yaml
 ```
 
+-Get config
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
 - Get Cilium
 ```
 CILIUM_CLI_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/cilium-cli/main/stable.txt)
