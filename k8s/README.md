@@ -66,7 +66,7 @@ helm repo update
 
 helm install monitoring Prometheus-community/Kube-Prometheus-stack \
 --namespace monitoring \
---values prometheus-values.yaml
+--values grafana-values.yaml
 
 ```
 
