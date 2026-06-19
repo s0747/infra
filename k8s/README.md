@@ -1,6 +1,6 @@
 K8S - NOTES
 
-- Reset 
+- Cluster reset 
 ```
 sudo kubeadm reset -f
 sudo crictl --runtime-endpoint unix:///var/run/containerd/containerd.sock rmi --prune
