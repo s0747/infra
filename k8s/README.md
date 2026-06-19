@@ -54,12 +54,12 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 
 - Grafana, prometheus
 ```
-helm repo add prometheus-community    https://prometheus-community.github.io/helm-charts
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 
-helm install  grafana/loki-stack \
-  --namespace monitoring \
-  --values loki-values.yaml
+helm install monitoring Prometheus-community/Kube-Prometheus-stack \
+--namespace monitoring \
+--values prometheus-values.yaml
 
 ```
 
@@ -69,6 +69,6 @@ helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
 
 helm install loki grafana/loki-stack \
-  --namespace monitoring \
+--namespace monitoring \
   --values loki-values.yaml
 ```
