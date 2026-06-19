@@ -62,6 +62,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 ```
 kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.30/deploy/local-path-storage.yaml
 kubectl get storageclass
+kubectl get configmap local-path-config -n local-path-storage -o jsonpath='{.data.config\.json}'
 
 ```
 
