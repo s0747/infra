@@ -58,6 +58,12 @@ kubectl get pods -n ingress-nginx
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/baremetal/deploy.yaml
 ```
 
+-LocalStorage
+```
+kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.30/deploy/local-path-storage.yaml
+kubectl get storageclass
+
+```
 
 - Grafana, prometheus
 ```
