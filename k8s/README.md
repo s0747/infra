@@ -1,5 +1,11 @@
 K8S - NOTES
 
+- Prepare new machine
+```
+#cgroups
+
+stat -fc %T /sys/fs/cgroup/
+```
 - Cluster reset 
 ```
 sudo kubeadm reset -f
