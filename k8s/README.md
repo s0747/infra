@@ -71,6 +71,8 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.8/confi
 kubectl apply -f metallb-config.yaml
 
 kubectl apply -f  nginx-service.yaml
+
+kubectl get svc -n ppa-ns
 ```
 
 -LocalStorage
