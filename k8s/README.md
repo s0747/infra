@@ -67,6 +67,10 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 - MetalLB
 ```
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.8/config/manifests/metallb-native.yaml
+
+kubectl apply -f metallb-config.yaml
+
+kubectl apply -f  nginx-service.yaml
 ```
 
 -LocalStorage
