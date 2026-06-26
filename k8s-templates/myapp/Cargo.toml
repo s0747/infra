@@ -1,0 +1,9 @@
+[package]
+name = "myapp"
+version = "0.1.2"
+edition = "2024"
+
+[dependencies]
+axum = "0.8"
+tokio = { version = "1.0", features = ["macros", "rt-multi-thread", "net"] }
+dotenvy = "0.15"

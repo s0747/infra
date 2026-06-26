@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service-clusterip
+  namespace: k8s-wprawki
+  labels:
+    creator: created-by-XXX
+    app: he-best-apka
+    env: prod
+spec:
+  type: ClusterIP
+  selector:
+    app: the-best-apka
+  ports:
+    - port: 8080
+      targetPort: 8080

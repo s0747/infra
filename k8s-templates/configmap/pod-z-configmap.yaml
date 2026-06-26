@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-z-configmap
+  namespace: k8s-wprawki
+  labels:
+    creator: created-by-XXX
+    app: apka-pierwsza
+    env: prod
+spec:
+  volumes:
+    - name: wolumen-nginx
+      configMap:
+        name: nginx-aplikacja-config
+    - name: wolumen-wlasciwosci
+      configMap:
+        name: nginx-aplikacja-config
+
+  containers:
+    - name: nginx
+      image: nginx:alpine
+      volumeMounts:
+        - name: wolumen-wlasciwosci
+          mountPath: /config/db_config.properties
+          subPath: db_config.properties
+
+        - name: wolumen-nginx
+          mountPath: /etc/nginx/conf.d/default.conf
+          subPath: nginx.conf
+      envFrom:
+        - configMapRef:
+            name: nginx-aplikacja-config
+
+      ports:
+        - containerPort: 80
+      # livenessProbe:
+      #   exec:
+      #     command:
+      #       - test
+      #       - -f
+      #       - /usr/share/nginx/html/healthy

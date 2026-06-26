@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-rs
+  namespace: k8s-wprawki
+  labels:
+    creator: created-by-XXX
+    app: myapp
+    env: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+      ver: 1-2
+      tier: frontend
+  template:
+    metadata:
+      name: myapp
+      labels:
+        app: myapp
+        ver: 1-2
+        tier: frontend
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 8080

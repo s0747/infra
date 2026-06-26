@@ -1,0 +1,9 @@
+grafana:
+  enabled: true
+  persistence:
+    type: pvc
+    enabled: true
+    storageClassName: "local-path" # Nazwa naszej naprawionej klasy dyskowej
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi
