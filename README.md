@@ -1,5 +1,6 @@
 # INFRA-NOTES
 - Terraform
+- HashiCorp Vault
 - Docker
 - Containerd
 - Kubernetes
