@@ -1,2 +1,12 @@
-# infra
-k8s, helm, etc
+# INFRA-NOTES
+- Terraform
+- Docker
+- Containerd
+- Kubernetes
+  - Helm
+  - Cilium / eBPF
+  - Longhorn
+  - ArgoCD
+- Grafana
+- Prometheus
+- Loki
