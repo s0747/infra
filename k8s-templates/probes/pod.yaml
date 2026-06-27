@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Pod
+
+spec:
+  containers:
+    - name: myapp
+      image: ghcr.io/twoj-login/myapp:latest # Podmień na swój obraz
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 8080
+          name: http
+      # ====================================================================
+      # KROK 1: STARTUP PROBE (Sonda startowa)
+      # Chroni aplikację podczas bootowania. Dopóki ta sonda nie przejdzie
+      # pomyślnie, sondy Liveness i Readiness są całkowicie zablokowane.
+      # ====================================================================
+      startupProbe:
+        httpGet:
+          path: /healthz
+          port: http
+        # Dajemy aplikacji max 30 sekund na wstanie (30 prób co 1 sekundę)
+        failureThreshold: 30
+        periodSeconds: 1
+
+      # ====================================================================
+      # KROK 2: LIVENESS PROBE (Sonda żywotności)
+      # Sprawdza, czy aplikacja się nie zawiesiła (np. deadlock w Rust).
+      # Jeśli przestanie odpowiadać, K8s ubije pod i uruchomi nowy kontener.
+      # ====================================================================
+      livenessProbe:
+        httpGet:
+          path: /live
+          port: http
+        initialDelaySeconds: 0 # 0, bo Startup Probe już sprawdził start
+        periodSeconds: 10 # Sprawdzaj co 10 sekund
+        timeoutSeconds: 2 # Czekaj maksymalnie 2 sekundy na odpowiedź
+        failureThreshold: 3 # Trzy błędy pod rząd = restart kontenera
+
+      # ====================================================================
+      # KROK 3: READINESS PROBE (Sonda gotowości)
+      # Sprawdza, czy aplikacja może przyjmować ruch użytkowników (np. czy
+      # ma połączenie z bazą danych). Jeśli padnie, K8s odetnie pod od Service.
+      # ====================================================================
+      readinessProbe:
+        httpGet:
+          path: /ready
+          port: http
+        initialDelaySeconds: 0
+        periodSeconds: 5 # Częstsze sprawdzanie gotowości (co 5 sek)
+        timeoutSeconds: 2
+        successThreshold: 1 # Wystarczy 1 sukces, by przywrócić ruch
+        failureThreshold: 2 # Dwa błędy odcinają ruch od tego poda
