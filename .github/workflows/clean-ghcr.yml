@@ -14,7 +14,7 @@ jobs:
       - name: Usuń stare wersje
         uses: actions/delete-package-versions@v5
         with:
-          package-name: 'nazwa-twojego-obrazu' # np. moja-aplikacja-rust
+          package-name: 'myapp' # np. moja-aplikacja-rust
           package-type: 'container'
           # Zostaw tylko 5 najnowszych wersji, resztę skasuj:
           min-versions-to-keep: 5
