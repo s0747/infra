@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service-loadbalancer
+  namespace: k8s-wprawki
+  labels:
+    creator: created-by-XXX
+    app: myapp
+    ver: 1-2
+    tier: frontend
+spec:
+  type: LoadBalancer
+  selector:
+    app: myapp
+    ver: 1-2
+    tier: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8081

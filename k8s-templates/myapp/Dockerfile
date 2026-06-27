@@ -1,6 +1,6 @@
-# ==========================================
+#NATIVE COMPILATION DOCKERFILE
+#
 # ETAP 1: Budowanie aplikacji (Builder)
-# ==========================================
 FROM rust:1.85-alpine AS builder
 
 # Instalujemy musl-dev, ponieważ obrazy alpine wymagają go do kompilacji
@@ -25,17 +25,18 @@ RUN cargo build --release
 # ETAP 2: Uruchomienie (Finalny, lekki obraz)
 # ==========================================
 # GCR Distroless jest bezpieczny, lekki i zawiera minimalne biblioteki C (glibc/musl)
-FROM gcr.io/distroless/static-debian12:latest
+#FROM gcr.io/distroless/static-debian12:latest
+#FROM alpine:latest
+FROM scratch
 
 WORKDIR /app
 
 # Kopiujemy tylko gotowy plik binarny z etapu budowania
-# UWAGA: Zmień "myapp" na nazwę swojej aplikacji zdefiniowaną w Cargo.toml
-COPY --from=builder /app/target/release/myapp .
+  COPY --from=builder /app/target/release/myapp .
 
 # Definiujemy domyślny port dla kontenera
-ENV PORT=8081
-EXPOSE 8081
+ENV PORT=8080
+EXPOSE 8080
 
 # Uruchamiamy aplikację
 CMD ["./myapp"]

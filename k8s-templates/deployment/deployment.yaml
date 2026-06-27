@@ -1,0 +1,28 @@
+# TYLKO JEŚLI OBRAZ JEST PRYWATNY:
+# kubectl create secret docker-registry ghcr-secret \
+#   --docker-server=ghcr.io \
+#   --docker-username=TWÓJ_LOGIN_GITHUB \
+#   --docker-password=TWÓJ_TOKEN_PAT \
+#   --docker-email=TWÓJ_EMAIL
+
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: test-rust-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-rust
+  template:
+    metadata:
+      labels:
+        app: test-rust
+    spec:
+      # imagePullSecrets:
+      # - name: ghcr-secret
+      containers:
+        - name: app
+          image: ghcr.io/s0747/myapp:0.1.0
+          ports:
+            - containerPort: 8080
