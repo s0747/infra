@@ -1,0 +1,22 @@
+name: Czyszczenie starych obrazów GHCR
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Uruchamiaj w każdą niedzielę o północy
+  workflow_dispatch: # Pozwala też kliknąć "Run workflow" ręcznie w panelu GitHub
+
+jobs:
+  clean-images:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write # Wymagane uprawnienie do usuwania pakietów
+    steps:
+      - name: Usuń stare wersje
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: 'nazwa-twojego-obrazu' # np. moja-aplikacja-rust
+          package-type: 'container'
+          # Zostaw tylko 5 najnowszych wersji, resztę skasuj:
+          min-versions-to-keep: 5
+          # Opcjonalnie: nie usuwaj wersji otagowanych jako "latest" lub "main"
+          ignore-versions: '^(latest|main)$'
