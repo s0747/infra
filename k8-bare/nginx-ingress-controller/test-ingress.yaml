@@ -17,4 +17,4 @@ spec:
               service:
                 name: nginx-loadbalancer # Nazwa Twojej usługi (np. ten Nginx, co wcześniej)
                 port:
-                  number: 80
+                  number: 8082

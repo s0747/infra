@@ -1,4 +1,4 @@
-# INFRA-NOTES
+# INFRA-K8S (WIP)
 - Terraform
 - HashiCorp Vault
 - Docker / Podman
@@ -6,10 +6,13 @@
 - Kubernetes
   - Cilium CNI
   - Hubble
-  - Envoy Gateway
   - Helm Charts
   - Longhorn
   - ArgoCD
 - Grafana
 - Prometheus
 - Loki
+
+ON LIST:
+- https://kustomize.io/
+- Envoy Gateway

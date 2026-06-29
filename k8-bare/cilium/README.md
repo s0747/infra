@@ -1,21 +1,14 @@
 
-- Cilium install
-- BPF
+# PRE INSTALL
 ```
-
 sudo mount bpffs /sys/fs/bpf -t bpf
 
-# add to fstab:
+# and add to fstab:
 
 bpffs                  /sys/fs/bpf             bpf     defaults        0 0
 ```
-#
-cilium install --set ipam.operator.clusterPoolIPv4PodCIDRList="10.244.0.0/16"
-```
 
-
-
-# Cilium install
+# Cilium INSTALL
 ```
 helm repo add cilium https://helm.cilium.io/
 helm repo update
@@ -25,9 +18,8 @@ kubectl scale deployment cilium-operator --replicas=1 -n kube-system
 
 lub 
 helm install cilium cilium/cilium 
- --version 1.19.3 \
  --namespace kube-system \
- -f values-cilium.yml
+ -f values.yml
 
 # Cilium status
 ```
@@ -46,7 +38,6 @@ KubeProxyReplacement:   True   [eth0 (Direct Routing)]
 
 # Cilium Restart
 kubectl rollout restart daemonset cilium -n kube-system
-
 
 # Test
 kubectl -n kube-system exec ds/cilium -- cilium status | grep KubeProxyReplacement
@@ -69,4 +60,20 @@ kubectl -f values-cilium-ip-pool.yaml
 kubectl get ciliumloadbalancerippools
 kubectl apply -f test-lb.yaml
 kubectl get svc nginx-loadbalancer
+```
+
+# Do SPRAWDZENIA
+```
+kubectl get pods -n kube-system -l k8s-app=cilium
+kubectl exec -n kube-system cilium-6nmsj -c cilium-agent -- cilium status
+
+kubectl get leases -n kube-system | grep cilium
+
+kubectl edit cm cilium-config -n kube-system
+
+data:
+  enable-l2-announcements: "true"
+  enable-lb-ipam: "true"
+
+
 ```

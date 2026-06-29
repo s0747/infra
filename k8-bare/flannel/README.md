@@ -8,5 +8,4 @@ helm install flannel flannel/flannel \
 #Sprawdzenie
 ```
 kubectl get pods -n kube-system -l app=flannel
-
 ```
