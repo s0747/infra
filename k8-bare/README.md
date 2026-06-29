@@ -46,22 +46,60 @@ bpffs                  /sys/fs/bpf             bpf     defaults        0 0
 ```
 
 - Cilium install
-```
+#
 cilium install --set ipam.operator.clusterPoolIPv4PodCIDRList="10.244.0.0/16"
 ```
 - Cilium status
 ```
 cilium status
 ```
+
+
+HELM Cilium install
+```
+helm repo add cilium https://helm.cilium.io/
+helm repo update
+
+helm upgrade cilium cilium/cilium --version 1.19.3 \
+  --namespace kube-system \
+  --reuse-values \
+  --set hubble.relay.enabled=true \
+  --set kubeProxyReplacement=true \
+  --set bpf.masquerade=true \
+  --set ipam.mode=kubernetes \
+  --set multiPoolL4LB=true \
+  --set l2announcements.enabled=true \
+  --set gatewayAPI.enabled=true \ 
+
+# Restart
+kubectl rollout restart daemonset cilium -n kube-system
+# Test
+kubectl -n kube-system exec ds/cilium -- cilium status | grep KubeProxyReplacement
+# Powinno być 
+# "KubeProxyReplacement:    True"
+
+# Logi
+kubectl logs -n kube-system -l k8s-app=cilium --tail=500 | grep -i "kube-proxy"
+
+# Test LB - jesli jest
+cilium hubble observe --to-ip 192.168.8.200 -f
+```
+
 - K8S status
 ```
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 kubectl get pods -n ingress-nginx
-```
 
 - Ingress
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/baremetal/deploy.yaml
+lub
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+helm install moj-ingress ingress-nginx/ingress-nginx \
+  --namespace ingress-nginx --create-namespace \
+  --set controller.hostNetwork=true \
+  --set controller.service.type=ClusterIP
 ```
 
 - MetalLB
@@ -70,7 +108,7 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.8/confi
 
 kubectl apply -f metallb-config.yaml
 
-kubectl apply -f  nginx-service.yaml
+kubectl apply -f nginx-service.yaml
 
 kubectl get svc -n ppa-ns
 ```

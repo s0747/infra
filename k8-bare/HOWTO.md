@@ -6,7 +6,7 @@ sudo journalctl -xeu kubelet --no-pager | tail -n 50
 
 kubectl get events -n monitoring --sort-by='.metadata.creationTimestamp'
 
-#Logi schedulera
+# Logi scheduler
 kubectl logs -n kube-system -l component=kube-scheduler
 
 # Pody oczekujące na utworzenie

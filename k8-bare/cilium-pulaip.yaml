@@ -1,0 +1,21 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: domowa-pula-ip
+  annotations:
+    # Ta adnotacja mówi Cilium: "używaj tej puli automatycznie dla każdego serwisu"
+    io.cilium/ipam-default-pool: "true"
+spec:
+  blocks:
+    - cidr: "192.168.8.200/29"
+---
+apiVersion: "cilium.io/v2alpha1"
+kind: CiliumL2AnnouncementPolicy
+metadata:
+  name: rozglaszanie-l2
+spec:
+  interfaces:
+    - ^eno1$
+  loadBalancerIPs: true
+  serviceSelector: {}
+  nodeSelector: {}

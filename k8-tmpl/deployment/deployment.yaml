@@ -24,6 +24,8 @@ spec:
     metadata:
       labels:
         app: myapp
+        ver: 1-2
+        tier: frontend
     spec:
       # imagePullSecrets:
       # - name: ghcr-secret
