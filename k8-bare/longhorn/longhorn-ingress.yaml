@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: longhorn-dashboard
+  namespace: longhorn-system
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: longhorn.local # Twoja domena do zarządzania dyskami
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: longhorn-frontend
+                port:
+                  number: 80

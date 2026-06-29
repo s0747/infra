@@ -1,0 +1,10 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: lokalna-pula-metallb
+  namespace: metallb-system
+spec:
+  addresses:
+    - 192.168.8.192/27 # Twoje 32 adresy (od .192 do .223)
+    # lub np
+    #  - 192.168.8.200-192.168.8.220

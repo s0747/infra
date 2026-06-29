@@ -1,0 +1,18 @@
+# values.yaml
+l2announcements:
+  enabled: true
+kubeProxyReplacement: true
+
+k8sServiceHost: "192.168.8.5"
+k8sServicePort: "6443"
+
+ipam:
+  mode: "cluster-pool"
+  operator:
+    clusterPoolIPv4PodCIDRList: ["10.244.0.0/16"]
+
+dnsProxy:
+  proxyPort: 5353
+
+operator:
+  replicas: 1

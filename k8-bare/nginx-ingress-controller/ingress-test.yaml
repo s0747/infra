@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-ingress
+  namespace: default
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false" # Wyłączamy wymuszanie HTTPS dla testu
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: moja-aplikacja.local # <-- Twoja domena testowa
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-loadbalancer # Nazwa Twojej usługi (np. ten Nginx, co wcześniej)
+                port:
+                  number: 80

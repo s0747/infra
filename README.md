@@ -4,10 +4,10 @@
 - Docker / Podman
 - Containerd
 - Kubernetes
-  - Cilium / eBPF
+  - Cilium CNI
   - Hubble
   - Envoy Gateway
-  - Helm
+  - Helm Charts
   - Longhorn
   - ArgoCD
 - Grafana

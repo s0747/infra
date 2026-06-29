@@ -1,0 +1,6 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner # Wskazuje, że sami ręcznie przydzielamy foldery
+volumeBindingMode: WaitForFirstConsumer # Ważne: czeka na przypisanie poda do serwera
